@@ -1,10 +1,12 @@
 #include "gamescene.h"
 #include <QGraphicsPixmapItem>
 #include <QKeyEvent>
+#include <QDir>
+#include <QPainter>
 
 GameScene::GameScene(QObject *parent)
     : QGraphicsScene(parent), m_loopSpeed(int(1000.0f/60.0f)), m_loopTime(0.0f), m_deltaTime(0.0f),
-      m_1Pressed(false), m_2Pressed(false), m_3Pressed(false), m_4Pressed(false)
+      m_game(Game::Type::GosperGliderGun), m_1Pressed(false), m_2Pressed(false), m_3Pressed(false), m_4Pressed(false)
 {
     setSceneRect(0,0, RESOLUTION.width(), RESOLUTION.height());
     setBackgroundBrush(Qt::black);
@@ -62,6 +64,19 @@ void GameScene::handlePlayerInput()
     }
 }
 
+void GameScene::renderScene()
+{
+    static int index = 0;
+    QString fileName = QDir::currentPath() + QDir::separator() + "screen" + QString::number(index++) + ".png";
+    QRect rect = sceneRect().toAlignedRect();
+    QImage image(rect.size(), QImage::Format_ARGB32);
+    image.fill(Qt::transparent);
+    QPainter painter(&image);
+    render(&painter);
+    image.save(fileName);
+    qDebug() << "saved " << fileName;
+}
+
 void GameScene::keyPressEvent(QKeyEvent *event)
 {
     if(!event->isAutoRepeat())
@@ -85,6 +100,10 @@ void GameScene::keyPressEvent(QKeyEvent *event)
         case Qt::Key_4:
         {
             m_4Pressed = true;
+        }
+        case Qt::Key_P:
+        {
+            //renderScene();
         }
             break;
         }

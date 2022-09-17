@@ -1,11 +1,11 @@
 #include "game.h"
 #include <QString>
 #include <QDebug>
-Game::Game()
+Game::Game(Type type)
 {
     m_output = new int[Game::LOGIC_SIZE.width() * Game::LOGIC_SIZE.height()];
     m_state  = new int[Game::LOGIC_SIZE.width() * Game::LOGIC_SIZE.height()];
-    m_type = Type::Random;
+    m_type = type;
     init();
 
 }
@@ -20,11 +20,8 @@ void Game::init()
 {
     memset(m_output, 0, Game::LOGIC_SIZE.width() * Game::LOGIC_SIZE.height() * sizeof(int));
     memset(m_state, 0,  Game::LOGIC_SIZE.width() * Game::LOGIC_SIZE.height() * sizeof(int));
-//    for(int x = 0; x  < Game::LOGIC_SIZE.width() * Game::LOGIC_SIZE.height(); ++x)
-//    {
-//        m_output = 0;
-//        m_state  = 0;
-//    }
+//  here you can set pattern
+
 
     auto set = [this](int x, int y, QString s)
     {
@@ -35,7 +32,6 @@ void Game::init()
             if(c == '#')
             {
                 a = 1;
-                //qDebug() << "offset " << y*Game::LOGIC_SIZE.width() + x + p;
             }
             else
             {
@@ -82,7 +78,7 @@ void Game::init()
     else if(m_type == Type::InfiniteGrowth)
     {
         // Infinite Growth
-        // set(20, 50, "########.#####...###......#######.#####");
+        set(20, 50, "########.#####...###......#######.#####");
     }
 
 

@@ -6,15 +6,16 @@
 class Game
 {
 public:
-    Game();
+    enum Type{
+      Random, Pentomino, GosperGliderGun, InfiniteGrowth
+    };
+    Game(Type type);
     ~Game();
     void init();
     void update();
     QImage image() const;
     constexpr static const QSize LOGIC_SIZE = QSize(160, 100);
-    enum Type{
-      Random, Pentomino, GosperGliderGun, InfiniteGrowth
-    };
+
     void setType(Type type);
     void print();
     void setPattern(int x, int y, QString pattern);

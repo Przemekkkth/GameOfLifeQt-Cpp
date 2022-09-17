@@ -17,6 +17,7 @@ private slots:
     void loop();
 private:
     void handlePlayerInput();
+    void renderScene();
     QTimer m_timer;
     QElapsedTimer m_elapsedTimer;
     const float m_loopSpeed;
