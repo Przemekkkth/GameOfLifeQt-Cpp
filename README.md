@@ -16,4 +16,6 @@ qmake && make
 ```
 
 ## Addons
-* [Qt] (https://www.qt.io/) - Cross-Platform software for embedded & desktop
+* [Qt](https://www.qt.io/) - Cross-Platform software for embedded & desktop
+* [yt](https://youtu.be/pNBxWuhPUT0) - gameplay
+* [See online](https://przemekkkth.github.io/gameoflife/index.html) - app hosted on GitHub
